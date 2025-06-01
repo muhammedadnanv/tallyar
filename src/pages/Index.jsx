@@ -79,14 +79,14 @@ const Index = () => {
           </p>
           <div className="flex justify-center gap-4 mb-8">
             <Button 
-              onClick={() => navigate('/template')} 
+              onClick={() => navigate('/create-invoice')} 
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
               size="lg"
             >
               Create Invoice <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button 
-              onClick={() => navigate('/receipt')} 
+              onClick={() => navigate('/create-invoice')} 
               variant="outline"
               className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-3 text-lg"
               size="lg"
@@ -179,7 +179,7 @@ const Index = () => {
           </p>
           <div className="flex justify-center gap-4">
             <Button 
-              onClick={() => navigate('/template')} 
+              onClick={() => navigate('/create-invoice')} 
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
               size="lg"
             >

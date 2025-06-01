@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { navItems } from "./nav-items";
 import TemplatePage from "./pages/TemplatePage";
 import ReceiptPage from "./pages/ReceiptPage";
+import CreateInvoice from "./pages/CreateInvoice";
 import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
@@ -18,10 +19,8 @@ const App = () => {
         <Toaster />
         <BrowserRouter>
           <Routes>
-            {navItems.map(({ to, page }) => (
-              <Route key={to} path={to} element={page} />
-            ))}
             <Route path="/" element={<Index />} />
+            <Route path="/create-invoice" element={<CreateInvoice />} />
             <Route path="/template" element={<TemplatePage />} />
             <Route path="/receipt" element={<ReceiptPage />} />
           </Routes>
