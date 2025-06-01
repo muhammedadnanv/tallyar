@@ -1,35 +1,57 @@
-import React from 'react';
-import FloatingLabelInput from './FloatingLabelInput';
 
-const BillToSection = ({ billTo, handleInputChange }) => {
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+const BillToSection = ({ data, onChange }) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    onChange({
+      ...data,
+      [name]: value
+    });
+  };
+
   return (
-    <div className="mb-6">
-      <h2 className="text-2xl font-semibold mb-4">Bill To</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FloatingLabelInput
-          id="billToName"
-          label="Name"
-          value={billTo.name}
-          onChange={handleInputChange}
-          name="name"
-        />
-        <FloatingLabelInput
-          id="billToPhone"
-          label="Phone"
-          value={billTo.phone}
-          onChange={handleInputChange}
-          name="phone"
-        />
-      </div>
-      <FloatingLabelInput
-        id="billToAddress"
-        label="Address"
-        value={billTo.address}
-        onChange={handleInputChange}
-        name="address"
-        className="mt-4"
-      />
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Bill To</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium mb-2">Name</label>
+          <input
+            type="text"
+            name="name"
+            className="w-full p-3 border rounded-lg"
+            value={data?.name || ''}
+            onChange={handleInputChange}
+            placeholder="Customer Name"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-2">Address</label>
+          <textarea
+            name="address"
+            className="w-full p-3 border rounded-lg"
+            rows="3"
+            value={data?.address || ''}
+            onChange={handleInputChange}
+            placeholder="Customer Address"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-2">Phone</label>
+          <input
+            type="text"
+            name="phone"
+            className="w-full p-3 border rounded-lg"
+            value={data?.phone || ''}
+            onChange={handleInputChange}
+            placeholder="Phone Number"
+          />
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

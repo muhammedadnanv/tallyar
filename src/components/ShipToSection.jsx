@@ -1,73 +1,96 @@
+
 import React, { useState } from 'react';
-import FloatingLabelInput from './FloatingLabelInput';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const ShipToSection = ({ shipTo, handleInputChange, billTo }) => {
+const ShipToSection = ({ data, onChange }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [copyBillToShip, setCopyBillToShip] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    onChange({
+      ...data,
+      [name]: value
+    });
+  };
 
   const toggleExpand = (e) => {
     e.preventDefault();
     setIsExpanded(!isExpanded);
   };
 
-  const handleCopyBillToShip = (e) => {
+  const handleCopyBillToShip = (e, billToData) => {
     setCopyBillToShip(e.target.checked);
-    if (e.target.checked) {
-      handleInputChange({ target: { name: 'name', value: billTo.name } });
-      handleInputChange({ target: { name: 'address', value: billTo.address } });
-      handleInputChange({ target: { name: 'phone', value: billTo.phone } });
+    if (e.target.checked && billToData) {
+      onChange({
+        name: billToData.name || '',
+        address: billToData.address || '',
+        phone: billToData.phone || ''
+      });
     }
   };
 
   return (
-    <div className="mb-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-semibold">Ship To</h2>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="copyBillToShip"
-              checked={copyBillToShip}
-              onChange={handleCopyBillToShip}
-              className="mr-2"
-            />
-            <label htmlFor="copyBillToShip">Same as Bill To</label>
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center justify-between">
+          <span>Ship To</span>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center text-sm">
+              <input
+                type="checkbox"
+                id="copyBillToShip"
+                checked={copyBillToShip}
+                onChange={(e) => handleCopyBillToShip(e, data)}
+                className="mr-2"
+              />
+              <label htmlFor="copyBillToShip">Same as Bill To</label>
+            </div>
+            <button onClick={toggleExpand} className="focus:outline-none">
+              {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+            </button>
           </div>
-          <button onClick={(e) => toggleExpand(e)} className="focus:outline-none">
-            {isExpanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
-          </button>
-        </div>
-      </div>
+        </CardTitle>
+      </CardHeader>
       {isExpanded && (
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FloatingLabelInput
-              id="shipToName"
-              label="Name"
-              value={shipTo.name}
-              onChange={handleInputChange}
+        <CardContent className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-2">Name</label>
+            <input
+              type="text"
               name="name"
-            />
-            <FloatingLabelInput
-              id="shipToPhone"
-              label="Phone"
-              value={shipTo.phone}
+              className="w-full p-3 border rounded-lg"
+              value={data?.name || ''}
               onChange={handleInputChange}
-              name="phone"
+              placeholder="Ship To Name"
             />
           </div>
-          <FloatingLabelInput
-            id="shipToAddress"
-            label="Address"
-            value={shipTo.address}
-            onChange={handleInputChange}
-            name="address"
-          />
-        </div>
+          <div>
+            <label className="block text-sm font-medium mb-2">Address</label>
+            <textarea
+              name="address"
+              className="w-full p-3 border rounded-lg"
+              rows="3"
+              value={data?.address || ''}
+              onChange={handleInputChange}
+              placeholder="Ship To Address"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2">Phone</label>
+            <input
+              type="text"
+              name="phone"
+              className="w-full p-3 border rounded-lg"
+              value={data?.phone || ''}
+              onChange={handleInputChange}
+              placeholder="Phone Number"
+            />
+          </div>
+        </CardContent>
       )}
-    </div>
+    </Card>
   );
 };
 
