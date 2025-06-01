@@ -1,6 +1,7 @@
+
 export const calculateSubTotal = (items) => {
   return items
-    .reduce((sum, item) => sum + item.quantity * item.amount, 0)
+    .reduce((sum, item) => sum + (item.quantity || 0) * (item.amount || 0), 0)
     .toFixed(2);
 };
 
@@ -8,11 +9,8 @@ export const calculateTaxAmount = (subTotal, taxPercentage) => {
   return (parseFloat(subTotal) * (taxPercentage / 100)).toFixed(2);
 };
 
-export const calculateGrandTotal = (subTotal, taxPercentage) => {
-  return (
-    parseFloat(subTotal).toFixed(2) +
-    calculateTaxAmount(subTotal, taxPercentage)
-  );
+export const calculateGrandTotal = (subTotal, taxAmount) => {
+  return (parseFloat(subTotal) + parseFloat(taxAmount)).toFixed(2);
 };
 
 export const generateGSTNumber = () => {
