@@ -1,6 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
-import QRCode from 'qrcode';
+import React, { useState } from 'react';
 import { Gift, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,30 +19,6 @@ const DonatingWidget = ({
   description = "Scan this QR code to make a donation"
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
-
-  useEffect(() => {
-    const generateQRCode = async () => {
-      try {
-        const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-        const qrDataUrl = await QRCode.toDataURL(upiUrl, {
-          width: 256,
-          margin: 2,
-          color: {
-            dark: '#000000',
-            light: '#FFFFFF'
-          }
-        });
-        setQrCodeDataUrl(qrDataUrl);
-      } catch (error) {
-        console.error('Error generating QR code:', error);
-      }
-    };
-
-    if (isOpen) {
-      generateQRCode();
-    }
-  }, [isOpen, upiId, name, amount]);
 
   const getPositionClasses = () => {
     switch (position) {
@@ -61,6 +36,10 @@ const DonatingWidget = ({
   };
 
   const IconComponent = icon === 'gift' ? Gift : Gift;
+
+  // Generate UPI URL and QR code using a web service
+  const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
 
   return (
     <>
@@ -99,17 +78,15 @@ const DonatingWidget = ({
             <CardContent className="space-y-4">
               <p className="text-sm text-gray-600">{description}</p>
               
-              {qrCodeDataUrl && (
-                <div className="flex justify-center">
-                  <img
-                    src={qrCodeDataUrl}
-                    alt="QR Code for UPI Payment"
-                    className="border rounded-lg"
-                    width={200}
-                    height={200}
-                  />
-                </div>
-              )}
+              <div className="flex justify-center">
+                <img
+                  src={qrCodeUrl}
+                  alt="QR Code for UPI Payment"
+                  className="border rounded-lg"
+                  width={200}
+                  height={200}
+                />
+              </div>
               
               <div className="text-center space-y-2">
                 <p className="font-semibold">₹{amount}</p>
