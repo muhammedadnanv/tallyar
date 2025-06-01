@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import BillToSection from '../components/BillToSection';
 import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
+import DonatingWidget from '../components/DonatingWidget';
 import { calculateSubTotal, calculateTaxAmount, calculateGrandTotal } from '../utils/invoiceCalculations';
 
 const Index = () => {
@@ -222,6 +223,22 @@ const Index = () => {
           </div>
         </div>
       </div>
+      
+      {/* Add the DonatingWidget */}
+      <DonatingWidget
+        upiId="adnanmuhammad4393@okicici"
+        name="Muhammed Adnan"
+        amount={199}
+        position="bottom-right"
+        primaryColor="#8B5CF6"
+        buttonText="Donate"
+        theme="modern"
+        icon="gift"
+        showPulse={true}
+        showGradient={true}
+        title="Support Us"
+        description="Scan this QR code to make a donation"
+      />
     </div>
   );
 };
