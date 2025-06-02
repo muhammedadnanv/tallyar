@@ -7,6 +7,8 @@ export const printElement = (elementId) => {
   }
 
   const printWindow = window.open('', '_blank');
+  
+  // Get all styles from the current document
   const styles = Array.from(document.styleSheets)
     .map(styleSheet => {
       try {
@@ -20,16 +22,36 @@ export const printElement = (elementId) => {
     })
     .join('');
 
+  // Also get inline styles
+  const inlineStyles = Array.from(document.getElementsByTagName('style'))
+    .map(style => style.innerHTML)
+    .join('');
+
   printWindow.document.write(`
     <!DOCTYPE html>
     <html>
       <head>
         <title>Tallyar - Print</title>
+        <meta charset="utf-8">
         <style>
           ${styles}
+          ${inlineStyles}
           @media print {
-            body { margin: 0; }
+            body { 
+              margin: 0; 
+              padding: 20px;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            }
             .no-print { display: none !important; }
+            * {
+              -webkit-print-color-adjust: exact !important;
+              color-adjust: exact !important;
+            }
+          }
+          @media screen {
+            body {
+              padding: 20px;
+            }
           }
         </style>
       </head>
@@ -41,10 +63,14 @@ export const printElement = (elementId) => {
 
   printWindow.document.close();
   printWindow.focus();
+  
+  // Wait for content to load before printing
   setTimeout(() => {
     printWindow.print();
-    printWindow.close();
-  }, 250);
+    setTimeout(() => {
+      printWindow.close();
+    }, 100);
+  }, 500);
 };
 
 export const printReceipt = (receiptData) => {
@@ -55,6 +81,7 @@ export const printReceipt = (receiptData) => {
     <html>
       <head>
         <title>Tallyar - Receipt</title>
+        <meta charset="utf-8">
         <style>
           body {
             font-family: 'Courier New', monospace;
@@ -78,6 +105,10 @@ export const printReceipt = (receiptData) => {
           .mt-4 { margin-top: 16px; }
           @media print {
             body { margin: 0; padding: 10px; }
+            * {
+              -webkit-print-color-adjust: exact !important;
+              color-adjust: exact !important;
+            }
           }
         </style>
       </head>
@@ -90,19 +121,19 @@ export const printReceipt = (receiptData) => {
           <div class="border-t border-b py-2 mb-2">
             <div>Invoice: ${receiptData.invoice?.number || 'N/A'}</div>
             <div>Date: ${receiptData.invoice?.date || new Date().toLocaleDateString()}</div>
-            <div>Customer: ${receiptData.billTo || 'N/A'}</div>
+            <div>Customer: ${receiptData.billTo?.name || 'N/A'}</div>
           </div>
           <div class="border-b py-2 mb-2">
             ${receiptData.items?.map(item => `
               <div class="flex justify-between">
-                <span>${item.name} x ${item.quantity}</span>
+                <span>${item.name || 'Item'} x ${item.quantity || 0}</span>
                 <span>$${((item.quantity || 0) * (item.amount || 0)).toFixed(2)}</span>
               </div>
             `).join('') || ''}
           </div>
           <div class="flex justify-between font-bold">
             <span>Total:</span>
-            <span>$${receiptData.total || '0.00'}</span>
+            <span>$${receiptData.grandTotal || '0.00'}</span>
           </div>
           <div class="text-center mt-4">Thank you for your business!</div>
         </div>
@@ -114,6 +145,8 @@ export const printReceipt = (receiptData) => {
   printWindow.focus();
   setTimeout(() => {
     printWindow.print();
-    printWindow.close();
-  }, 250);
+    setTimeout(() => {
+      printWindow.close();
+    }, 100);
+  }, 500);
 };

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -21,15 +21,34 @@ const ShipToSection = ({ data, onChange, billToData }) => {
   };
 
   const handleCopyBillToShip = (e) => {
-    setCopyBillToShip(e.target.checked);
-    if (e.target.checked && billToData) {
+    const isChecked = e.target.checked;
+    setCopyBillToShip(isChecked);
+    
+    if (isChecked && billToData) {
+      onChange({
+        name: billToData.name || '',
+        address: billToData.address || '',
+        phone: billToData.phone || ''
+      });
+    } else if (!isChecked) {
+      onChange({
+        name: '',
+        address: '',
+        phone: ''
+      });
+    }
+  };
+
+  // Auto-update ship to when bill to changes and copy is enabled
+  useEffect(() => {
+    if (copyBillToShip && billToData) {
       onChange({
         name: billToData.name || '',
         address: billToData.address || '',
         phone: billToData.phone || ''
       });
     }
-  };
+  }, [billToData, copyBillToShip, onChange]);
 
   return (
     <Card>
@@ -64,6 +83,7 @@ const ShipToSection = ({ data, onChange, billToData }) => {
               value={data?.name || ''}
               onChange={handleInputChange}
               placeholder="Ship To Name"
+              disabled={copyBillToShip}
             />
           </div>
           <div>
@@ -75,6 +95,7 @@ const ShipToSection = ({ data, onChange, billToData }) => {
               value={data?.address || ''}
               onChange={handleInputChange}
               placeholder="Ship To Address"
+              disabled={copyBillToShip}
             />
           </div>
           <div>
@@ -86,6 +107,7 @@ const ShipToSection = ({ data, onChange, billToData }) => {
               value={data?.phone || ''}
               onChange={handleInputChange}
               placeholder="Phone Number"
+              disabled={copyBillToShip}
             />
           </div>
         </CardContent>
