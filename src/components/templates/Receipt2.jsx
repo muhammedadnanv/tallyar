@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { format } from 'date-fns';
 import BaseTemplate2 from './BaseTemplate2';
@@ -46,7 +47,7 @@ const Receipt2 = ({ data, isPrint = false }) => {
             <div>{yourCompany.address || "N/A"}</div>
             {yourCompany.phone && <div>{yourCompany.phone}</div>}
           </div>
-          <div className="mb-2">Customer: {billTo || "N/A"}</div>
+          <div className="mb-2">Customer: {billTo?.name || "N/A"}</div>
           <div className="mb-2">Cashier: {cashier || "N/A"}</div>
           <div className="text-center mb-2">******************************</div>
           <div className="py-2 mb-2">
