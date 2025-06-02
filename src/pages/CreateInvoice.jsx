@@ -184,6 +184,7 @@ const CreateInvoice = () => {
             />
             <ShipToSection 
               data={formData.shipTo} 
+              billToData={formData.billTo}
               onChange={(data) => updateFormData('shipTo', data)} 
             />
           </div>

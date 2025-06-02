@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const ShipToSection = ({ data, onChange }) => {
+const ShipToSection = ({ data, onChange, billToData }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [copyBillToShip, setCopyBillToShip] = useState(false);
 
@@ -20,7 +20,7 @@ const ShipToSection = ({ data, onChange }) => {
     setIsExpanded(!isExpanded);
   };
 
-  const handleCopyBillToShip = (e, billToData) => {
+  const handleCopyBillToShip = (e) => {
     setCopyBillToShip(e.target.checked);
     if (e.target.checked && billToData) {
       onChange({
@@ -42,7 +42,7 @@ const ShipToSection = ({ data, onChange }) => {
                 type="checkbox"
                 id="copyBillToShip"
                 checked={copyBillToShip}
-                onChange={(e) => handleCopyBillToShip(e, data)}
+                onChange={handleCopyBillToShip}
                 className="mr-2"
               />
               <label htmlFor="copyBillToShip">Same as Bill To</label>
