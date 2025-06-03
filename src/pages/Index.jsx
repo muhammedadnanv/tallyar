@@ -259,6 +259,15 @@ const Index = () => {
         </div>
       </div>
       
+      {/* Footer with powered by text */}
+      <footer className="bg-gray-50 border-t border-gray-200 py-6">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-sm text-gray-600">
+            Powered by <a href="https://www.retailx.site" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 font-medium">retailx.site</a> | <a href="https://www.retailx.site" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">www.retailx.site</a>
+          </p>
+        </div>
+      </footer>
+      
       <DonatingWidget upiId="adnanmuhammad4393@okicici" name="Muhammed Adnan" amount={199} position="bottom-right" primaryColor="#8B5CF6" buttonText="Support Us" theme="modern" icon="gift" showPulse={true} showGradient={true} title="Love Tallyar?" description="Help us keep building amazing tools" />
     </div>;
 };
