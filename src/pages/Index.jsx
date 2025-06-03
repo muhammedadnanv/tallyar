@@ -5,8 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Receipt, Download, Printer, Zap, Shield, Star, ArrowRight, Sparkles, Users, Globe, TrendingUp } from 'lucide-react';
 import DonatingWidget from '../components/DonatingWidget';
+
 const Index = () => {
   const navigate = useNavigate();
+
   const features = [{
     icon: FileText,
     title: "AI-Powered Invoices",
@@ -126,7 +128,7 @@ const Index = () => {
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
             <Button onClick={() => navigate('/create-invoice')} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105" size="lg">
-              Start Creating Free <ArrowRight className="ml-2 h-5 w-5" />
+              Start Creating <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             
           </div>
@@ -247,11 +249,11 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button onClick={() => navigate('/create-invoice')} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105" size="lg">
-                Start Free Today <ArrowRight className="ml-2 h-5 w-5" />
+                Start Today <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
             <p className="text-sm text-gray-500 mt-6">
-              No credit card required • Free forever plan • Setup in 30 seconds
+              No credit card required • Forever plan • Setup in 30 seconds
             </p>
           </div>
         </div>
@@ -260,4 +262,5 @@ const Index = () => {
       <DonatingWidget upiId="adnanmuhammad4393@okicici" name="Muhammed Adnan" amount={199} position="bottom-right" primaryColor="#8B5CF6" buttonText="Support Us" theme="modern" icon="gift" showPulse={true} showGradient={true} title="Love Tallyar?" description="Help us keep building amazing tools" />
     </div>;
 };
+
 export default Index;
