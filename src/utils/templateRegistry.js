@@ -11,6 +11,7 @@ import Template9 from '../components/templates/Template9';
 import Receipt1 from '../components/templates/Receipt1';
 import Receipt2 from '../components/templates/Receipt2';
 import Receipt3 from '../components/templates/Receipt3';
+import Receipt4 from '../components/templates/Receipt4';
 
 export const templates = [
   { name: 'Template 1', component: Template1 },
@@ -28,6 +29,7 @@ export const receiptTemplates = [
   { name: 'Receipt 1', component: Receipt1 },
   { name: 'Receipt 2', component: Receipt2 },
   { name: 'Receipt 3', component: Receipt3 },
+  { name: 'Receipt 4', component: Receipt4 },
 ];
 
 export const getTemplate = (templateNumber) => {

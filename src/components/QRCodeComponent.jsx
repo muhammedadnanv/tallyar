@@ -8,8 +8,13 @@ const QRCodeComponent = ({ invoiceData, templateNumber, size = 100 }) => {
   useEffect(() => {
     const generateQRCode = async () => {
       try {
+        if (!invoiceData || !templateNumber) {
+          console.log('Missing invoiceData or templateNumber');
+          return;
+        }
+
         // Create a unique URL for this invoice
-        const invoiceId = `${invoiceData.invoice.number}-${Date.now()}`;
+        const invoiceId = `${invoiceData.invoice?.number || 'INV'}-${Date.now()}`;
         const downloadUrl = `${window.location.origin}/download-invoice/${invoiceId}`;
         
         // Store invoice data temporarily (in real app, this would be in a database)
@@ -36,18 +41,28 @@ const QRCodeComponent = ({ invoiceData, templateNumber, size = 100 }) => {
       }
     };
 
-    if (invoiceData && templateNumber) {
-      generateQRCode();
-    }
+    generateQRCode();
   }, [invoiceData, templateNumber, size]);
 
   if (!qrCodeUrl) {
-    return <div className="w-24 h-24 bg-gray-200 rounded flex items-center justify-center text-xs">QR Loading...</div>;
+    return (
+      <div 
+        className="bg-gray-200 rounded flex items-center justify-center text-xs"
+        style={{ width: size, height: size }}
+      >
+        QR Loading...
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col items-center">
-      <img src={qrCodeUrl} alt="Invoice QR Code" className="rounded" />
+      <img 
+        src={qrCodeUrl} 
+        alt="Invoice QR Code" 
+        className="rounded"
+        style={{ width: size, height: size }}
+      />
       <p className="text-xs text-gray-600 mt-1 text-center">Scan to download</p>
     </div>
   );
