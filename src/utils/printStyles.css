@@ -1,0 +1,82 @@
+
+/* Print-specific styles for optimal printing */
+@media print {
+  @page {
+    size: A4;
+    margin: 0.5in;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  .print-break-before {
+    page-break-before: always;
+  }
+  
+  .print-break-after {
+    page-break-after: always;
+  }
+  
+  .print-avoid-break {
+    page-break-inside: avoid;
+  }
+  
+  .print-table {
+    page-break-inside: auto;
+  }
+  
+  .print-table tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  
+  .print-table thead {
+    display: table-header-group;
+  }
+  
+  .print-table tfoot {
+    display: table-footer-group;
+  }
+}
+
+/* Receipt-specific print styles */
+@media print {
+  .receipt-print {
+    width: 80mm !important;
+    max-width: 80mm !important;
+    font-family: "Courier New", monospace !important;
+    font-size: 8pt !important;
+    line-height: 1.2 !important;
+  }
+  
+  .receipt-print @page {
+    size: 80mm auto;
+    margin: 2mm;
+  }
+}
+
+/* Screen-specific styles for preview */
+@media screen {
+  .print-only {
+    display: none;
+  }
+}

@@ -1,35 +1,67 @@
+
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 export const generatePDF = async (invoiceData, templateNumber) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const invoice = document.createElement('div');
-      document.body.appendChild(invoice);
+      // Create a temporary container for rendering
+      const tempContainer = document.createElement('div');
+      tempContainer.style.position = 'absolute';
+      tempContainer.style.left = '-9999px';
+      tempContainer.style.top = '0';
+      tempContainer.style.width = '794px';
+      tempContainer.style.height = '1123px';
+      tempContainer.style.backgroundColor = 'white';
+      document.body.appendChild(tempContainer);
       
-      // Render the InvoiceTemplate component to a string
-      const InvoiceTemplate = (await import('../components/InvoiceTemplate')).default;
-      const ReactDOMServer = (await import('react-dom/server')).default;
-      const React = (await import('react')).default;
+      // Dynamically import and render the component
+      const { default: React } = await import('react');
+      const { createRoot } = await import('react-dom/client');
+      const { default: InvoiceTemplate } = await import('../components/InvoiceTemplate');
       
-      const invoiceElement = React.createElement(InvoiceTemplate, { data: invoiceData, templateNumber });
-      const invoiceHTML = ReactDOMServer.renderToString(invoiceElement);
+      // Create root and render
+      const root = createRoot(tempContainer);
       
-      invoice.innerHTML = invoiceHTML;
-      invoice.style.width = '210mm';
-      invoice.style.height = '297mm';
+      await new Promise((renderResolve) => {
+        root.render(
+          React.createElement(InvoiceTemplate, { 
+            data: invoiceData, 
+            templateNumber: templateNumber 
+          })
+        );
+        
+        // Wait for rendering to complete
+        setTimeout(renderResolve, 1000);
+      });
       
-      const canvas = await html2canvas(invoice, {
+      // Capture with html2canvas
+      const canvas = await html2canvas(tempContainer, {
         scale: 2,
         useCORS: true,
         logging: false,
+        backgroundColor: '#ffffff',
+        width: 794,
+        height: 1123,
+        allowTaint: true,
+        foreignObjectRendering: true
       });
       
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgData = canvas.toDataURL('image/png', 1.0);
       
+      // Create PDF with exact A4 dimensions
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+        compress: true
+      });
+      
+      // A4 dimensions: 210mm x 297mm
       pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
-      const { number, date, paymentDate } = invoiceData.invoice;
+      
+      // Generate filename based on template and data
+      const { number, date } = invoiceData.invoice;
       const { name: companyName } = invoiceData.yourCompany;
       const { name: billToName } = invoiceData.billTo;
       const timestamp = new Date().getTime();
@@ -37,41 +69,44 @@ export const generatePDF = async (invoiceData, templateNumber) => {
       let fileName;
       switch (templateNumber) {
         case 1:
-          fileName = `${number}.pdf`;
+          fileName = `Invoice_${number || timestamp}.pdf`;
           break;
         case 2:
-          fileName = `${companyName}_${number}.pdf`;
+          fileName = `${companyName || 'Company'}_${number || timestamp}.pdf`;
           break;
         case 3:
-          fileName = `${companyName}.pdf`;
+          fileName = `${companyName || 'Invoice'}_${timestamp}.pdf`;
           break;
         case 4:
-          fileName = `${date}.pdf`;
+          fileName = `Invoice_${date || new Date().toLocaleDateString().replace(/\//g, '-')}.pdf`;
           break;
         case 5:
-          fileName = `${number}-${date}.pdf`;
+          fileName = `${number || 'INV'}-${date || new Date().toLocaleDateString().replace(/\//g, '-')}.pdf`;
           break;
         case 6:
-          fileName = `invoice_${timestamp}.pdf`;
+          fileName = `TaxInvoice_${timestamp}.pdf`;
           break;
         case 7:
-          fileName = `Invoice_${number}.pdf`;
+          fileName = `Invoice_${number || timestamp}.pdf`;
           break;
         case 8:
-          fileName = `Invoice_${billToName}.pdf`;
+          fileName = `Invoice_${billToName || 'Customer'}_${timestamp}.pdf`;
           break;
         case 9:
-          fileName = `IN-${date}.pdf`;
+          fileName = `IN-${date || new Date().toLocaleDateString().replace(/\//g, '-')}.pdf`;
           break;
         default:
-          fileName = `invoice_template_${templateNumber}.pdf`;
+          fileName = `invoice_template_${templateNumber}_${timestamp}.pdf`;
       }
 
       pdf.save(fileName);
       
-      document.body.removeChild(invoice);
+      // Cleanup
+      root.unmount();
+      document.body.removeChild(tempContainer);
       resolve();
     } catch (error) {
+      console.error('Error generating PDF:', error);
       reject(error);
     }
   });
