@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
+import QRCodeComponent from '../QRCodeComponent';
 
 const Template2 = ({ data }) => {
   const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
@@ -16,11 +17,14 @@ const Template2 = ({ data }) => {
             <p>{yourCompany.address}</p>
             <p>{yourCompany.phone}</p>
           </div>
-          <div className="text-right">
-            <h2 className="text-xl font-semibold text-cyan-700">Tax invoice</h2>
-            <p>INVOICE NUMBER: {invoice.number}</p>
-            <p>DATE: {invoice.date}</p>
-            <p>DUE DATE: {invoice.paymentDate}</p>
+          <div className="text-right flex flex-col items-end gap-4">
+            <div>
+              <h2 className="text-xl font-semibold text-cyan-700">Tax invoice</h2>
+              <p>INVOICE NUMBER: {invoice.number}</p>
+              <p>DATE: {invoice.date}</p>
+              <p>DUE DATE: {invoice.paymentDate}</p>
+            </div>
+            <QRCodeComponent invoiceData={data} templateNumber={2} size={80} />
           </div>
         </div>
 

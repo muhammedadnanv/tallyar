@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
+import QRCodeComponent from '../QRCodeComponent';
 
 const Template1 = ({ data }) => {
   const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
@@ -11,6 +12,9 @@ const Template1 = ({ data }) => {
         <div className="flex justify-between items-center mb-8">
           <div className="text-right">
             <h2 className="text-3xl font-semibold">INVOICE</h2>
+          </div>
+          <div className="flex items-center gap-4">
+            <QRCodeComponent invoiceData={data} templateNumber={1} size={80} />
           </div>
         </div>
 

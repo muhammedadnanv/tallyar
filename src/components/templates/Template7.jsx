@@ -2,6 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
+import QRCodeComponent from '../QRCodeComponent';
 
 const Template7 = ({ data }) => {
   const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '' } = data || {};
@@ -29,10 +30,11 @@ const Template7 = ({ data }) => {
                 : "N/A"}
             </p>
           </div>
-          <div className="text-right">
+          <div className="text-right flex flex-col items-end gap-4">
             <h2 className="text-2xl font-bold">
               {yourCompany.name || "Your Company Name"}
             </h2>
+            <QRCodeComponent invoiceData={data} templateNumber={7} size={80} />
           </div>
         </div>
 

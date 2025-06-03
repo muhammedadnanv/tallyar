@@ -2,6 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
+import QRCodeComponent from '../QRCodeComponent';
 
 const Template9 = ({ data }) => {
   const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '' } = data || {};
@@ -18,23 +19,26 @@ const Template9 = ({ data }) => {
             <p>{yourCompany.address || "Company Address"}</p>
             <p>{yourCompany.phone || "Company Phone"}</p>
           </div>
-          <div className="text-right">
-            <p>
-              <span className="font-semibold">Invoice#:</span>{" "}
-              {invoice.number || "N/A"}
-            </p>
-            <p>
-              <span className="font-semibold">Invoice Date:</span>{" "}
-              {invoice.date
-                ? format(new Date(invoice.date), "MMM dd, yyyy")
-                : "N/A"}
-            </p>
-            <p>
-              <span className="font-semibold">Due Date:</span>{" "}
-              {invoice.paymentDate
-                ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
-                : "N/A"}
-            </p>
+          <div className="text-right flex flex-col items-end gap-4">
+            <div>
+              <p>
+                <span className="font-semibold">Invoice#:</span>{" "}
+                {invoice.number || "N/A"}
+              </p>
+              <p>
+                <span className="font-semibold">Invoice Date:</span>{" "}
+                {invoice.date
+                  ? format(new Date(invoice.date), "MMM dd, yyyy")
+                  : "N/A"}
+              </p>
+              <p>
+                <span className="font-semibold">Due Date:</span>{" "}
+                {invoice.paymentDate
+                  ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
+                  : "N/A"}
+              </p>
+            </div>
+            <QRCodeComponent invoiceData={data} templateNumber={9} size={80} />
           </div>
         </div>
 
