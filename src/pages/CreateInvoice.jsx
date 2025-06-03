@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -214,22 +213,28 @@ const CreateInvoice = () => {
             </Card>
 
             <div className="space-y-4">
-              <Button 
-                onClick={() => handleGenerateInvoice(1)} 
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
-                size="lg"
-              >
-                Generate Invoice
-              </Button>
+              <div className="grid grid-cols-2 gap-4">
+                <Button 
+                  onClick={() => handleGenerateInvoice(1)} 
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
+                  size="lg"
+                >
+                  Generate Invoice
+                </Button>
+                
+                <Button 
+                  onClick={() => handleGenerateReceipt(1)} 
+                  variant="outline"
+                  className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 py-3"
+                  size="lg"
+                >
+                  Generate Receipt
+                </Button>
+              </div>
               
-              <Button 
-                onClick={() => handleGenerateReceipt(1)} 
-                variant="outline"
-                className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 py-3"
-                size="lg"
-              >
-                Generate Receipt
-              </Button>
+              <div className="text-center text-sm text-gray-600">
+                <p>Choose from multiple templates after generation</p>
+              </div>
             </div>
           </div>
         </div>
