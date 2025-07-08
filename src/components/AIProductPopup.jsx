@@ -80,6 +80,21 @@ const AIProductPopup = () => {
               See My Products
             </Button>
           </div>
+
+          {/* Watermark */}
+          <div className="mt-6 pt-4 border-t border-gray-100">
+            <p className="text-xs text-gray-400 text-center">
+              Powered by{" "}
+              <a 
+                href="https://www.linkedin.com/in/muhammedadnanvv/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:text-blue-600 font-medium"
+              >
+                Muhammed Adnan
+              </a>
+            </p>
+          </div>
         </CardContent>
       </Card>
     </div>
