@@ -264,7 +264,7 @@ const Index = () => {
       <footer className="bg-gray-50 border-t border-gray-200 py-6">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-gray-600">
-            Powered by <a href="https://www.retailx.site" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 font-medium">retailx.site</a> | <a href="https://www.retailx.site" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">www.retailx.site</a>
+            Powered by <a href="https://www.linkedin.com/in/muhammedadnanvv/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 font-medium">Muhammed Adnan</a>
           </p>
         </div>
       </footer>
