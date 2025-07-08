@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Receipt, Download, Printer, Zap, Shield, Star, ArrowRight, Sparkles, Users, Globe, TrendingUp } from 'lucide-react';
 import DonatingWidget from '../components/DonatingWidget';
+import AIProductPopup from '../components/AIProductPopup';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -269,6 +270,7 @@ const Index = () => {
       </footer>
       
       <DonatingWidget upiId="adnanmuhammad4393@okicici" name="Muhammed Adnan" amount={199} position="bottom-right" primaryColor="#8B5CF6" buttonText="Support Us" theme="modern" icon="gift" showPulse={true} showGradient={true} title="Love Tallyar?" description="Help us keep building amazing tools" />
+      <AIProductPopup />
     </div>;
 };
 
