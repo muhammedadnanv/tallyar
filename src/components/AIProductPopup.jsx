@@ -28,7 +28,7 @@ const AIProductPopup = () => {
   };
 
   const handleWhatsApp = () => {
-    window.open(`https://wa.me/916567778508?text=Hi! I'm interested in building an AI SaaS product.`, '_blank');
+    window.open(`https://wa.me/919656778508?text=Hi! I'm interested in building an AI SaaS product.`, '_blank');
   };
 
   const handleProductHunt = () => {
@@ -58,7 +58,7 @@ const AIProductPopup = () => {
             </p>
             <div className="flex items-center justify-center gap-2 text-blue-600 font-medium">
               <MessageCircle className="w-4 h-4" />
-              <span>+91 65677 8508</span>
+              <span>+91 9656778508</span>
             </div>
           </div>
 
