@@ -1,10 +1,15 @@
-const CACHE_NAME = 'tallyar-v1';
+const CACHE_NAME = 'tallyar-v2';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
   '/static/css/main.css',
   '/tallyar-logo.svg',
-  '/manifest.json'
+  '/manifest.json',
+  // Add other critical resources
+  '/src/pages/Index.jsx',
+  '/src/pages/CreateInvoice.jsx',
+  '/src/pages/TemplatePage.jsx',
+  '/src/pages/ReceiptPage.jsx'
 ];
 
 // Install event
@@ -17,15 +22,44 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Fetch event
+// Fetch event with improved caching strategy
 self.addEventListener('fetch', (event) => {
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      }
-    )
+        // Return cached version if available
+        if (response) {
+          return response;
+        }
+        
+        // Clone the request because it's a stream
+        const fetchRequest = event.request.clone();
+        
+        return fetch(fetchRequest).then((response) => {
+          // Check if we received a valid response
+          if (!response || response.status !== 200 || response.type !== 'basic') {
+            return response;
+          }
+
+          // Clone the response because it's a stream
+          const responseToCache = response.clone();
+
+          caches.open(CACHE_NAME)
+            .then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+
+          return response;
+        }).catch(() => {
+          // Return offline page or cached resource if available
+          return caches.match('/') || new Response('Offline - Please check your connection');
+        });
+      })
   );
 });
 

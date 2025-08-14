@@ -65,48 +65,55 @@ const ItemDetails = ({ items, taxPercentage, onChange, onTaxChange }) => {
           <div key={index} className="relative border rounded-lg p-4 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">Item Name</label>
+                <label className="block text-sm font-medium mb-2">Item Name *</label>
                 <input
                   type="text"
-                  className="w-full p-3 border rounded-lg"
+                  className="w-full p-3 border rounded-lg text-base touch-manipulation focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   value={item.name || ''}
                   onChange={(e) => handleItemChange(index, 'name', e.target.value)}
                   placeholder="Item name"
+                  required
+                  aria-label={`Item ${index + 1} name`}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Quantity</label>
+                <label className="block text-sm font-medium mb-2">Quantity *</label>
                 <input
                   type="number"
-                  className="w-full p-3 border rounded-lg"
+                  className="w-full p-3 border rounded-lg text-base touch-manipulation focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   value={item.quantity || 1}
                   onChange={(e) => handleItemChange(index, 'quantity', parseFloat(e.target.value) || 0)}
                   min="0"
                   step="0.01"
+                  required
+                  aria-label={`Item ${index + 1} quantity`}
                 />
               </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2">Unit Price</label>
+                <label className="block text-sm font-medium mb-2">Unit Price *</label>
                 <input
                   type="number"
-                  className="w-full p-3 border rounded-lg"
+                  className="w-full p-3 border rounded-lg text-base touch-manipulation focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   value={item.amount || 0}
                   onChange={(e) => handleItemChange(index, 'amount', parseFloat(e.target.value) || 0)}
                   min="0"
                   step="0.01"
                   placeholder="0.00"
+                  required
+                  aria-label={`Item ${index + 1} unit price`}
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Total</label>
                 <input
-                  type="number"
-                  className="w-full p-3 border rounded-lg bg-gray-100"
-                  value={item.total?.toFixed(2) || '0.00'}
+                  type="text"
+                  className="w-full p-3 border rounded-lg bg-gray-100 text-base"
+                  value={`$${(item.total || 0).toFixed(2)}`}
                   disabled
+                  aria-label={`Item ${index + 1} total amount`}
                 />
               </div>
             </div>
@@ -114,11 +121,12 @@ const ItemDetails = ({ items, taxPercentage, onChange, onTaxChange }) => {
             <div>
               <label className="block text-sm font-medium mb-2">Description</label>
               <textarea
-                className="w-full p-3 border rounded-lg"
+                className="w-full p-3 border rounded-lg text-base touch-manipulation focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-vertical"
                 rows="2"
                 value={item.description || ''}
                 onChange={(e) => handleItemChange(index, 'description', e.target.value)}
                 placeholder="Item description (optional)"
+                aria-label={`Item ${index + 1} description`}
               />
             </div>
             
@@ -145,13 +153,14 @@ const ItemDetails = ({ items, taxPercentage, onChange, onTaxChange }) => {
             <label className="block text-sm font-medium mb-2">Tax Percentage (%)</label>
             <input
               type="number"
-              className="w-full p-3 border rounded-lg"
+              className="w-full p-3 border rounded-lg text-base touch-manipulation focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               value={taxPercentage || 0}
               onChange={(e) => onTaxChange(parseFloat(e.target.value) || 0)}
               min="0"
               max="100"
               step="0.01"
               placeholder="0"
+              aria-label="Tax percentage"
             />
           </div>
           

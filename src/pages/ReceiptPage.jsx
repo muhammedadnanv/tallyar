@@ -79,13 +79,13 @@ const ReceiptPage = () => {
   const SelectedTemplate = receiptTemplates.find(t => t.id === currentTemplate)?.component || Receipt1;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
-        <Button variant="ghost" onClick={handleBack}>
+    <div className="container mx-auto px-4 py-4 sm:py-8 safe-area-inset safe-area-inset-top safe-area-inset-bottom">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4">
+        <Button variant="ghost" onClick={handleBack} size="touch" className="w-full sm:w-auto">
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
-        <div className="flex gap-2">
-          <Button onClick={handlePrint} disabled={isPrinting} variant="outline">
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          <Button onClick={handlePrint} disabled={isPrinting} variant="outline" size="touch" className="w-full sm:w-auto">
             {isPrinting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -98,7 +98,7 @@ const ReceiptPage = () => {
               </>
             )}
           </Button>
-          <Button onClick={handleDownloadPDF} disabled={isDownloading}>
+          <Button onClick={handleDownloadPDF} disabled={isDownloading} size="touch" className="w-full sm:w-auto">>
             {isDownloading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -111,26 +111,28 @@ const ReceiptPage = () => {
         </div>
       </div>
 
-      <div className="mb-8 overflow-x-auto">
-        <div className="flex space-x-4">
+      <div className="mb-6 sm:mb-8 overflow-x-auto">
+        <div className="flex space-x-2 sm:space-x-4 pb-2">
           {receiptTemplates.map((template) => (
             <div
               key={template.id}
-              className={`cursor-pointer p-4 border rounded ${
+              className={`cursor-pointer p-3 sm:p-4 border rounded whitespace-nowrap min-w-0 flex-shrink-0 touch-manipulation active:scale-95 transition-transform ${
                 currentTemplate === template.id
-                  ? "border-blue-500"
-                  : "border-gray-300"
+                  ? "border-blue-500 bg-blue-50"
+                  : "border-gray-300 hover:border-gray-400"
               }`}
               onClick={() => handleTemplateChange(template.id)}
             >
-              {template.name}
+              <span className="text-sm sm:text-base">{template.name}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="mx-auto border shadow-lg" id="receipt-template">
-        <SelectedTemplate data={formData} />
+      <div className="mx-auto border shadow-lg overflow-auto" style={{ maxWidth: '100%' }}>
+        <div className="w-full min-w-[300px] sm:w-auto" id="receipt-template">
+          <SelectedTemplate data={formData} />
+        </div>
       </div>
     </div>
   );
