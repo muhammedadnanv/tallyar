@@ -74,22 +74,23 @@ const CreateInvoice = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 safe-area-inset">
+      <div className="container mx-auto px-4 py-4 sm:py-8 safe-area-inset-top safe-area-inset-bottom">
+        <div className="mb-6 sm:mb-8">
           <Button
             onClick={() => navigate('/')}
             variant="outline"
-            className="mb-4"
+            className="mb-4 w-full sm:w-auto"
+            size="touch"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Button>
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-4">
               Create Invoice
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               Fill in the details below to generate your professional invoice
             </p>
             <div className="flex justify-center mt-6">
@@ -100,8 +101,8 @@ const CreateInvoice = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <div className="space-y-6">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-8">
+          <div className="space-y-4 sm:space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle>Company Information</CardTitle>
@@ -111,7 +112,7 @@ const CreateInvoice = () => {
                   <label className="block text-sm font-medium mb-2">Company Name</label>
                   <input
                     type="text"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-base touch-manipulation"
                     value={formData.yourCompany.name}
                     onChange={(e) => updateFormData('yourCompany', { ...formData.yourCompany, name: e.target.value })}
                     placeholder="Your Company Name"
@@ -120,7 +121,7 @@ const CreateInvoice = () => {
                 <div>
                   <label className="block text-sm font-medium mb-2">Address</label>
                   <textarea
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-base touch-manipulation"
                     rows="3"
                     value={formData.yourCompany.address}
                     onChange={(e) => updateFormData('yourCompany', { ...formData.yourCompany, address: e.target.value })}
@@ -130,8 +131,8 @@ const CreateInvoice = () => {
                 <div>
                   <label className="block text-sm font-medium mb-2">Phone</label>
                   <input
-                    type="text"
-                    className="w-full p-3 border rounded-lg"
+                    type="tel"
+                    className="w-full p-3 border rounded-lg text-base touch-manipulation"
                     value={formData.yourCompany.phone}
                     onChange={(e) => updateFormData('yourCompany', { ...formData.yourCompany, phone: e.target.value })}
                     placeholder="Phone Number"
@@ -149,18 +150,18 @@ const CreateInvoice = () => {
                   <label className="block text-sm font-medium mb-2">Invoice Number</label>
                   <input
                     type="text"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-base touch-manipulation"
                     value={formData.invoice.number}
                     onChange={(e) => updateFormData('invoice', { ...formData.invoice, number: e.target.value })}
                     placeholder="INV-001"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-2">Invoice Date</label>
                     <input
                       type="date"
-                      className="w-full p-3 border rounded-lg"
+                      className="w-full p-3 border rounded-lg text-base touch-manipulation"
                       value={formData.invoice.date}
                       onChange={(e) => updateFormData('invoice', { ...formData.invoice, date: e.target.value })}
                     />
@@ -169,7 +170,7 @@ const CreateInvoice = () => {
                     <label className="block text-sm font-medium mb-2">Due Date</label>
                     <input
                       type="date"
-                      className="w-full p-3 border rounded-lg"
+                      className="w-full p-3 border rounded-lg text-base touch-manipulation"
                       value={formData.invoice.paymentDate}
                       onChange={(e) => updateFormData('invoice', { ...formData.invoice, paymentDate: e.target.value })}
                     />
@@ -189,7 +190,7 @@ const CreateInvoice = () => {
             />
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <ItemDetails 
               items={formData.items}
               taxPercentage={formData.taxPercentage}
@@ -203,7 +204,7 @@ const CreateInvoice = () => {
               </CardHeader>
               <CardContent>
                 <textarea
-                  className="w-full p-3 border rounded-lg"
+                  className="w-full p-3 border rounded-lg text-base touch-manipulation"
                   rows="4"
                   value={formData.notes}
                   onChange={(e) => updateFormData('notes', e.target.value)}
@@ -213,11 +214,11 @@ const CreateInvoice = () => {
             </Card>
 
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Button 
                   onClick={() => handleGenerateInvoice(1)} 
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
-                  size="lg"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4"
+                  size="touch"
                 >
                   Generate Invoice
                 </Button>
@@ -225,8 +226,8 @@ const CreateInvoice = () => {
                 <Button 
                   onClick={() => handleGenerateReceipt(1)} 
                   variant="outline"
-                  className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 py-3"
-                  size="lg"
+                  className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 py-4"
+                  size="touch"
                 >
                   Generate Receipt
                 </Button>
