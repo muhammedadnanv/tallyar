@@ -108,19 +108,19 @@ const Index = () => {
             The Future of Invoicing is Here
           </Badge>
           
-          <h1 className="text-7xl font-extrabold mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               Tallyar
             </span>
             <br />
-            <span className="text-gray-900 text-5xl">Makes Invoicing</span>
+            <span className="text-gray-900 text-3xl sm:text-4xl md:text-5xl">Makes Invoicing</span>
             <br />
-            <span className="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent text-5xl">
+            <span className="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl">
               Effortless
             </span>
           </h1>
           
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-10 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-4xl mx-auto mb-10 leading-relaxed px-4">
             Join thousands of entrepreneurs who've revolutionized their billing process. Create 
             <span className="font-semibold text-blue-600"> stunning invoices</span> and 
             <span className="font-semibold text-purple-600"> professional receipts</span> in seconds, 
@@ -135,7 +135,7 @@ const Index = () => {
           </div>
 
           {/* Trust Indicators */}
-          <div className="flex justify-center items-center gap-8 text-sm text-gray-500 mb-16">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 text-sm text-gray-500 mb-16 px-4">
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-green-500" />
               <span className="font-medium">100% Secure</span>
@@ -151,15 +151,15 @@ const Index = () => {
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mb-20 px-4">
             {stats.map((stat, index) => <div key={index} className="text-center">
                 <div className="flex justify-center mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                    <stat.icon className="h-6 w-6 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                    <stat.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-1">{stat.number}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">{stat.number}</div>
+                <div className="text-sm sm:text-base text-gray-600 font-medium">{stat.label}</div>
               </div>)}
           </div>
         </div>
@@ -170,25 +170,25 @@ const Index = () => {
             <Badge variant="outline" className="mb-4 px-4 py-2 border-purple-200 text-purple-600">
               Why Choose Tallyar?
             </Badge>
-            <h2 className="text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 px-4">
               Everything You Need to 
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Win</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
               Powerful features designed by entrepreneurs, for entrepreneurs. No fluff, just results.
             </p>
           </div>
           
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-4">
             {features.map((feature, index) => <Card key={index} className="group hover:shadow-2xl transition-all duration-500 border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:-translate-y-2">
                 <CardHeader>
-                  <div className={`w-14 h-14 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className="h-7 w-7 text-white" />
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <feature.icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                   </div>
-                  <CardTitle className="text-xl font-bold text-gray-900">{feature.title}</CardTitle>
+                  <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{feature.description}</p>
                 </CardContent>
               </Card>)}
           </div>
@@ -200,31 +200,31 @@ const Index = () => {
             <Badge variant="outline" className="mb-4 px-4 py-2 border-green-200 text-green-600">
               Success Stories
             </Badge>
-            <h2 className="text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 px-4">
               Loved by 
               <span className="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent"> Thousands</span>
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 px-4">
               Real entrepreneurs. Real results. Real impact.
             </p>
           </div>
           
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-4">
             {testimonials.map((testimonial, index) => <Card key={index} className="border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                <CardContent className="pt-8">
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />)}
+                <CardContent className="pt-6 sm:pt-8">
+                  <div className="flex mb-3 sm:mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />)}
                   </div>
-                  <p className="text-gray-700 mb-6 italic leading-relaxed text-lg">
+                  <p className="text-gray-700 mb-4 sm:mb-6 italic leading-relaxed text-sm sm:text-base md:text-lg">
                     "{testimonial.content}"
                   </p>
                   <div className="flex items-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold mr-3 sm:mr-4 text-sm sm:text-base">
                       {testimonial.avatar}
                     </div>
                     <div>
-                      <p className="font-bold text-gray-900">{testimonial.name}</p>
-                      <p className="text-sm text-gray-600">{testimonial.role}</p>
+                      <p className="font-bold text-gray-900 text-sm sm:text-base">{testimonial.name}</p>
+                      <p className="text-xs sm:text-sm text-gray-600">{testimonial.role}</p>
                       <p className="text-xs text-blue-600 font-medium">{testimonial.company}</p>
                     </div>
                   </div>
@@ -234,26 +234,26 @@ const Index = () => {
         </div>
 
         {/* Enhanced CTA Section */}
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl opacity-10"></div>
-          <div className="relative text-center bg-white/80 backdrop-blur-sm rounded-3xl p-16 shadow-2xl border border-white/20">
-            <Badge variant="outline" className="mb-6 px-6 py-3 border-blue-200 text-blue-600 bg-blue-50">
-              <Sparkles className="w-4 h-4 mr-2" />
+        <div className="relative px-4">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl sm:rounded-3xl opacity-10"></div>
+          <div className="relative text-center bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-12 md:p-16 shadow-2xl border border-white/20">
+            <Badge variant="outline" className="mb-4 sm:mb-6 px-4 sm:px-6 py-2 sm:py-3 border-blue-200 text-blue-600 bg-blue-50 text-xs sm:text-sm">
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
               Ready to Transform Your Business?
             </Badge>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
               Join the Invoicing 
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Revolution</span>
             </h2>
-            <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base md:text-xl text-gray-600 mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed">
               Stop wrestling with complicated software. Start creating beautiful invoices that actually get paid faster.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button onClick={() => navigate('/create-invoice')} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105" size="lg">
-                Start Today <ArrowRight className="ml-2 h-5 w-5" />
+              <Button onClick={() => navigate('/create-invoice')} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 sm:px-12 py-4 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105" size="lg">
+                Start Today <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </div>
-            <p className="text-sm text-gray-500 mt-6">
+            <p className="text-xs sm:text-sm text-gray-500 mt-4 sm:mt-6">
               No credit card required • Forever plan • Setup in 30 seconds
             </p>
           </div>
