@@ -13,6 +13,11 @@ import Template12 from '../components/templates/Template12';
 import Template13 from '../components/templates/Template13';
 import Template14 from '../components/templates/Template14';
 import Template15 from '../components/templates/Template15';
+import Template16 from '../components/templates/Template16';
+import Template17 from '../components/templates/Template17';
+import Template18 from '../components/templates/Template18';
+import Template19 from '../components/templates/Template19';
+import Template20 from '../components/templates/Template20';
 import Receipt1 from '../components/templates/Receipt1';
 import Receipt2 from '../components/templates/Receipt2';
 import Receipt3 from '../components/templates/Receipt3';
@@ -23,6 +28,11 @@ import Receipt7 from '../components/templates/Receipt7';
 import Receipt8 from '../components/templates/Receipt8';
 import Receipt9 from '../components/templates/Receipt9';
 import Receipt10 from '../components/templates/Receipt10';
+import Receipt11 from '../components/templates/Receipt11';
+import Receipt12 from '../components/templates/Receipt12';
+import Receipt13 from '../components/templates/Receipt13';
+import Receipt14 from '../components/templates/Receipt14';
+import Receipt15 from '../components/templates/Receipt15';
 export const templates = [
   { name: 'Template 1', component: Template1 },
   { name: 'Template 2', component: Template2 },
@@ -39,6 +49,11 @@ export const templates = [
   { name: 'Template 13', component: Template13 },
   { name: 'Template 14', component: Template14 },
   { name: 'Template 15', component: Template15 },
+  { name: 'Template 16', component: Template16 },
+  { name: 'Template 17', component: Template17 },
+  { name: 'Template 18', component: Template18 },
+  { name: 'Template 19', component: Template19 },
+  { name: 'Template 20', component: Template20 },
 ];
 
 export const receiptTemplates = [
@@ -52,6 +67,11 @@ export const receiptTemplates = [
   { name: 'Receipt 8', component: Receipt8 },
   { name: 'Receipt 9', component: Receipt9 },
   { name: 'Receipt 10', component: Receipt10 },
+  { name: 'Receipt 11', component: Receipt11 },
+  { name: 'Receipt 12', component: Receipt12 },
+  { name: 'Receipt 13', component: Receipt13 },
+  { name: 'Receipt 14', component: Receipt14 },
+  { name: 'Receipt 15', component: Receipt15 },
 ];
 
 export const getTemplate = (templateNumber) => {

@@ -15,6 +15,11 @@ import Receipt7 from '../components/templates/Receipt7';
 import Receipt8 from '../components/templates/Receipt8';
 import Receipt9 from '../components/templates/Receipt9';
 import Receipt10 from '../components/templates/Receipt10';
+import Receipt11 from '../components/templates/Receipt11';
+import Receipt12 from '../components/templates/Receipt12';
+import Receipt13 from '../components/templates/Receipt13';
+import Receipt14 from '../components/templates/Receipt14';
+import Receipt15 from '../components/templates/Receipt15';
 
 const receiptTemplates = [
   { id: 1, name: 'Receipt 1', component: Receipt1 },
@@ -27,6 +32,11 @@ const receiptTemplates = [
   { id: 8, name: 'Receipt 8', component: Receipt8 },
   { id: 9, name: 'Receipt 9', component: Receipt9 },
   { id: 10, name: 'Receipt 10', component: Receipt10 },
+  { id: 11, name: 'Receipt 11', component: Receipt11 },
+  { id: 12, name: 'Receipt 12', component: Receipt12 },
+  { id: 13, name: 'Receipt 13', component: Receipt13 },
+  { id: 14, name: 'Receipt 14', component: Receipt14 },
+  { id: 15, name: 'Receipt 15', component: Receipt15 },
 ];
 
 const ReceiptPage = () => {
