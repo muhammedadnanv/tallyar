@@ -12,7 +12,7 @@ const BaseTemplate = ({ data, children }) => {
         minHeight: "1123px"
       }}
     >
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{__html: `
         @media print {
           @page {
             size: A4;
@@ -28,7 +28,7 @@ const BaseTemplate = ({ data, children }) => {
             padding: 0;
           }
         }
-      `}</style>
+      `}} />
       {children}
     </div>
   );

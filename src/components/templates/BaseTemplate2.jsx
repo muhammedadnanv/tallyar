@@ -18,7 +18,7 @@ const BaseTemplate2 = ({ children, width = "80mm", height = "auto", className = 
   
   return (
     <>
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{__html: `
         @media print {
           @page {
             size: 80mm auto;
@@ -42,7 +42,7 @@ const BaseTemplate2 = ({ children, width = "80mm", height = "auto", className = 
             padding: 2mm;
           }
         }
-      `}</style>
+      `}} />
       <div
         className={`bg-white rounded-lg shadow-lg mx-auto print:shadow-none print:rounded-none receipt-container ${className}`}
         style={printStyle}
