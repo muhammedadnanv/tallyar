@@ -9,12 +9,24 @@ import Receipt1 from '../components/templates/Receipt1';
 import Receipt2 from '../components/templates/Receipt2';
 import Receipt3 from '../components/templates/Receipt3';
 import Receipt4 from '../components/templates/Receipt4';
+import Receipt5 from '../components/templates/Receipt5';
+import Receipt6 from '../components/templates/Receipt6';
+import Receipt7 from '../components/templates/Receipt7';
+import Receipt8 from '../components/templates/Receipt8';
+import Receipt9 from '../components/templates/Receipt9';
+import Receipt10 from '../components/templates/Receipt10';
 
 const receiptTemplates = [
   { id: 1, name: 'Receipt 1', component: Receipt1 },
   { id: 2, name: 'Receipt 2', component: Receipt2 },
   { id: 3, name: 'Receipt 3', component: Receipt3 },
   { id: 4, name: 'Receipt 4', component: Receipt4 },
+  { id: 5, name: 'Receipt 5', component: Receipt5 },
+  { id: 6, name: 'Receipt 6', component: Receipt6 },
+  { id: 7, name: 'Receipt 7', component: Receipt7 },
+  { id: 8, name: 'Receipt 8', component: Receipt8 },
+  { id: 9, name: 'Receipt 9', component: Receipt9 },
+  { id: 10, name: 'Receipt 10', component: Receipt10 },
 ];
 
 const ReceiptPage = () => {
