@@ -14,7 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      invoices: {
+        Row: {
+          bill_to_address: string | null
+          bill_to_email: string | null
+          bill_to_name: string | null
+          bill_to_phone: string | null
+          company_address: string | null
+          company_email: string | null
+          company_name: string | null
+          company_phone: string | null
+          created_at: string | null
+          discount_amount: number | null
+          discount_percentage: number | null
+          due_date: string | null
+          grand_total: number
+          id: string
+          invoice_date: string
+          invoice_number: string
+          is_receipt: boolean | null
+          items: Json
+          notes: string | null
+          ship_to_address: string | null
+          ship_to_name: string | null
+          shipping_cost: number | null
+          sub_total: number
+          tax_amount: number | null
+          tax_percentage: number | null
+          template_number: number | null
+          terms: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          bill_to_address?: string | null
+          bill_to_email?: string | null
+          bill_to_name?: string | null
+          bill_to_phone?: string | null
+          company_address?: string | null
+          company_email?: string | null
+          company_name?: string | null
+          company_phone?: string | null
+          created_at?: string | null
+          discount_amount?: number | null
+          discount_percentage?: number | null
+          due_date?: string | null
+          grand_total: number
+          id?: string
+          invoice_date: string
+          invoice_number: string
+          is_receipt?: boolean | null
+          items?: Json
+          notes?: string | null
+          ship_to_address?: string | null
+          ship_to_name?: string | null
+          shipping_cost?: number | null
+          sub_total: number
+          tax_amount?: number | null
+          tax_percentage?: number | null
+          template_number?: number | null
+          terms?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          bill_to_address?: string | null
+          bill_to_email?: string | null
+          bill_to_name?: string | null
+          bill_to_phone?: string | null
+          company_address?: string | null
+          company_email?: string | null
+          company_name?: string | null
+          company_phone?: string | null
+          created_at?: string | null
+          discount_amount?: number | null
+          discount_percentage?: number | null
+          due_date?: string | null
+          grand_total?: number
+          id?: string
+          invoice_date?: string
+          invoice_number?: string
+          is_receipt?: boolean | null
+          items?: Json
+          notes?: string | null
+          ship_to_address?: string | null
+          ship_to_name?: string | null
+          shipping_cost?: number | null
+          sub_total?: number
+          tax_amount?: number | null
+          tax_percentage?: number | null
+          template_number?: number | null
+          terms?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
