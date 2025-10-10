@@ -1,10 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Loader2, Printer } from 'lucide-react';
+import { ArrowLeft, Loader2, Printer, Save } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { generateReceiptPDF } from '../utils/receiptPDFGenerator';
 import { printElement } from '../utils/printUtils';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/components/ui/use-toast';
 import Receipt1 from '../components/templates/Receipt1';
 import Receipt2 from '../components/templates/Receipt2';
 import Receipt3 from '../components/templates/Receipt3';
@@ -46,11 +48,22 @@ const ReceiptPage = () => {
   const [currentTemplate, setCurrentTemplate] = useState(1);
   const [isDownloading, setIsDownloading] = useState(false);
   const [isPrinting, setIsPrinting] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [editId, setEditId] = useState(null);
+  const [user, setUser] = useState(null);
+  const { toast } = useToast();
 
   useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+    };
+    checkUser();
+
     if (location.state && location.state.formData) {
       setFormData(location.state.formData);
       setCurrentTemplate(location.state.selectedTemplate || 1);
+      setEditId(location.state.editId || null);
     } else {
       const savedFormData = localStorage.getItem('receiptData');
       if (savedFormData) {
@@ -94,6 +107,72 @@ const ReceiptPage = () => {
     navigate('/');
   };
 
+  const handleSave = async () => {
+    if (!user) {
+      toast({
+        title: 'Authentication Required',
+        description: 'Please login to save receipts',
+        variant: 'destructive',
+      });
+      navigate('/auth');
+      return;
+    }
+
+    setIsSaving(true);
+    try {
+      const receiptData = {
+        user_id: user.id,
+        invoice_number: formData.receiptNumber || `REC-${Date.now()}`,
+        invoice_date: formData.date || new Date().toISOString().split('T')[0],
+        company_name: formData.companyName || '',
+        company_address: formData.companyAddress || '',
+        company_email: formData.companyEmail || '',
+        company_phone: formData.companyPhone || '',
+        bill_to_name: formData.customerName || '',
+        bill_to_address: formData.customerAddress || '',
+        bill_to_email: formData.customerEmail || '',
+        bill_to_phone: formData.customerPhone || '',
+        items: formData.items || [],
+        tax_percentage: parseFloat(formData.taxPercentage) || 0,
+        sub_total: parseFloat(formData.subTotal) || 0,
+        tax_amount: parseFloat(formData.taxAmount) || 0,
+        grand_total: parseFloat(formData.grandTotal) || 0,
+        notes: formData.notes || '',
+        template_number: currentTemplate,
+        is_receipt: true,
+      };
+
+      if (editId) {
+        const { error } = await supabase
+          .from('invoices')
+          .update(receiptData)
+          .eq('id', editId);
+        if (error) throw error;
+        toast({
+          title: 'Success',
+          description: 'Receipt updated successfully',
+        });
+      } else {
+        const { error } = await supabase
+          .from('invoices')
+          .insert([receiptData]);
+        if (error) throw error;
+        toast({
+          title: 'Success',
+          description: 'Receipt saved successfully',
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   if (!formData) {
     return <div>Loading...</div>;
   }
@@ -107,6 +186,21 @@ const ReceiptPage = () => {
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
         <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          {user && (
+            <Button onClick={handleSave} disabled={isSaving} variant="outline" size="touch" className="w-full sm:w-auto">
+              {isSaving ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Save className="mr-2 h-4 w-4" />
+                  {editId ? 'Update' : 'Save'}
+                </>
+              )}
+            </Button>
+          )}
           <Button onClick={handlePrint} disabled={isPrinting} variant="outline" size="touch" className="w-full sm:w-auto">
             {isPrinting ? (
               <>
@@ -120,7 +214,7 @@ const ReceiptPage = () => {
               </>
             )}
           </Button>
-          <Button onClick={handleDownloadPDF} disabled={isDownloading} size="touch" className="w-full sm:w-auto">>
+          <Button onClick={handleDownloadPDF} disabled={isDownloading} size="touch" className="w-full sm:w-auto">
             {isDownloading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

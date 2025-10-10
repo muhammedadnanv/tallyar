@@ -1,11 +1,13 @@
 
-import { HomeIcon, FileTextIcon, ReceiptIcon, SettingsIcon, CreditCardIcon } from "lucide-react";
+import { HomeIcon, FileTextIcon, ReceiptIcon, SettingsIcon, CreditCardIcon, History as HistoryIcon, LogInIcon } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import CreateInvoice from "./pages/CreateInvoice.jsx";
 import TemplatePage from "./pages/TemplatePage.jsx";
 import ReceiptPage from "./pages/ReceiptPage.jsx";
 import Settings from "./pages/Settings.jsx";
 import Billing from "./pages/Billing.jsx";
+import Auth from "./pages/Auth.jsx";
+import History from "./pages/History.jsx";
 
 export const navItems = [
   {
@@ -43,5 +45,23 @@ export const navItems = [
     to: "/billing",
     icon: <CreditCardIcon className="h-4 w-4" />,
     page: <Billing />,
+  },
+  {
+    title: "Auth",
+    to: "/auth",
+    icon: <LogInIcon className="h-4 w-4" />,
+    page: <Auth />,
+  },
+  {
+    title: "History",
+    to: "/history",
+    icon: <HistoryIcon className="h-4 w-4" />,
+    page: <History />,
+  },
+  {
+    title: "Download",
+    to: "/download",
+    icon: <FileTextIcon className="h-4 w-4" />,
+    page: <TemplatePage />,
   },
 ];

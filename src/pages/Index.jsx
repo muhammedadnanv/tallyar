@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Receipt, Download, Printer, Zap, Shield, Star, ArrowRight, Sparkles, Users, Globe, TrendingUp } from 'lucide-react';
+import { FileText, Receipt, Download, Printer, Zap, Shield, Star, ArrowRight, Sparkles, Users, Globe, TrendingUp, History as HistoryIcon, LogOut, LogIn } from 'lucide-react';
 import DonatingWidget from '../components/DonatingWidget';
 import AIProductPopup from '../components/AIProductPopup';
+import { useAuth } from '@/hooks/useAuth';
 
 const Index = () => {
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
   const features = [{
     icon: FileText,
@@ -94,6 +96,35 @@ const Index = () => {
             </span>
           </div>
           <div className="flex items-center space-x-4">
+            {user ? (
+              <>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate('/history')}
+                >
+                  <HistoryIcon className="h-4 w-4 mr-2" />
+                  History
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={signOut}
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/auth')}
+              >
+                <LogIn className="h-4 w-4 mr-2" />
+                Login
+              </Button>
+            )}
             <Badge variant="outline" className="border-green-500 text-green-600 bg-green-50">
               <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
               Live & Ready
