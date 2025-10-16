@@ -121,25 +121,24 @@ const History = () => {
   const renderList = (items, type) => (
     <div className="space-y-4">
       {items.length === 0 ? (
-        <p className="text-center text-muted-foreground py-8 text-sm sm:text-base">
+        <p className="text-center text-muted-foreground py-8">
           No {type} found. Create your first one!
         </p>
       ) : (
         items.map((item) => (
           <Card key={item.id}>
             <CardHeader>
-              <div className="flex justify-between items-start gap-4">
-                <div className="flex-1 min-w-0">
-                  <CardTitle className="text-base sm:text-lg truncate">{item.invoice_number}</CardTitle>
-                  <CardDescription className="text-sm">
+              <div className="flex justify-between items-start">
+                <div>
+                  <CardTitle className="text-lg">{item.invoice_number}</CardTitle>
+                  <CardDescription>
                     {new Date(item.invoice_date).toLocaleDateString()}
                   </CardDescription>
                 </div>
-                <div className="flex gap-1 sm:gap-2 flex-shrink-0">
+                <div className="flex gap-2">
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-10 w-10 touch-manipulation"
                     onClick={() => handleView(item)}
                   >
                     <Eye className="h-4 w-4" />
@@ -147,7 +146,6 @@ const History = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-10 w-10 touch-manipulation"
                     onClick={() => handleEdit(item)}
                   >
                     <Edit className="h-4 w-4" />
@@ -155,7 +153,6 @@ const History = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-10 w-10 touch-manipulation"
                     onClick={() => setDeleteId(item.id)}
                   >
                     <Trash2 className="h-4 w-4" />
@@ -165,8 +162,8 @@ const History = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-2 text-sm">
-                {item.company_name && <p className="truncate"><strong>Company:</strong> {item.company_name}</p>}
-                {item.bill_to_name && <p className="truncate"><strong>Bill To:</strong> {item.bill_to_name}</p>}
+                {item.company_name && <p><strong>Company:</strong> {item.company_name}</p>}
+                {item.bill_to_name && <p><strong>Bill To:</strong> {item.bill_to_name}</p>}
                 <p><strong>Total:</strong> ${item.grand_total}</p>
               </div>
             </CardContent>
@@ -185,22 +182,18 @@ const History = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-4 sm:py-8 safe-area-inset safe-area-inset-top safe-area-inset-bottom">
+    <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold">History</h1>
-        <Button variant="ghost" onClick={() => navigate('/')} size="touch">
+        <h1 className="text-3xl font-bold">History</h1>
+        <Button variant="ghost" onClick={() => navigate('/')}>
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
       </div>
 
       <Tabs defaultValue="invoices" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 h-12">
-          <TabsTrigger value="invoices" className="text-sm sm:text-base">
-            Invoices ({invoices.length})
-          </TabsTrigger>
-          <TabsTrigger value="receipts" className="text-sm sm:text-base">
-            Receipts ({receipts.length})
-          </TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="invoices">Invoices ({invoices.length})</TabsTrigger>
+          <TabsTrigger value="receipts">Receipts ({receipts.length})</TabsTrigger>
         </TabsList>
         <TabsContent value="invoices" className="mt-6">
           {renderList(invoices, 'invoices')}

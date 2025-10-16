@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Zap } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import BillToSection from '../components/BillToSection';
 import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
@@ -77,25 +77,15 @@ const CreateInvoice = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 safe-area-inset">
       <div className="container mx-auto px-4 py-4 sm:py-8 safe-area-inset-top safe-area-inset-bottom">
         <div className="mb-6 sm:mb-8">
-          <div className="flex flex-col sm:flex-row gap-2 mb-4">
-            <Button
-              onClick={() => navigate('/')}
-              variant="outline"
-              className="w-full sm:w-auto"
-              size="touch"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Button>
-            <Button
-              onClick={() => navigate('/pos-quick-sale')}
-              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-              size="touch"
-            >
-              <Zap className="h-4 w-4 mr-2" />
-              Quick POS Sale
-            </Button>
-          </div>
+          <Button
+            onClick={() => navigate('/')}
+            variant="outline"
+            className="mb-4 w-full sm:w-auto"
+            size="touch"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Home
+          </Button>
           <div className="text-center">
             <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-4">
               Create Invoice

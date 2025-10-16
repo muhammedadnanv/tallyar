@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Receipt, Download, Printer, Zap, Shield, Star, ArrowRight, Sparkles, Users, Globe, TrendingUp, History as HistoryIcon, LogOut, LogIn, Package, ShoppingCart } from 'lucide-react';
+import { FileText, Receipt, Download, Printer, Zap, Shield, Star, ArrowRight, Sparkles, Users, Globe, TrendingUp, History as HistoryIcon, LogOut, LogIn } from 'lucide-react';
 import DonatingWidget from '../components/DonatingWidget';
 import AIProductPopup from '../components/AIProductPopup';
 import { useAuth } from '@/hooks/useAuth';
@@ -101,14 +101,6 @@ const Index = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => navigate('/products')}
-                >
-                  <Package className="h-4 w-4 mr-2" />
-                  Products
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
                   onClick={() => navigate('/history')}
                 >
                   <HistoryIcon className="h-4 w-4 mr-2" />
@@ -170,10 +162,7 @@ const Index = () => {
             <Button onClick={() => navigate('/create-invoice')} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105" size="lg">
               Start Creating <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button onClick={() => navigate('/pos-quick-sale')} variant="outline" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300" size="lg">
-              <ShoppingCart className="mr-2 h-5 w-5" />
-              Quick POS
-            </Button>
+            
           </div>
 
           {/* Trust Indicators */}
