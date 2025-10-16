@@ -70,11 +70,11 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4 safe-area-inset">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>{isLogin ? 'Login' : 'Sign Up'}</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-xl sm:text-2xl">{isLogin ? 'Login' : 'Sign Up'}</CardTitle>
+          <CardDescription className="text-sm sm:text-base">
             {isLogin
               ? 'Enter your credentials to access your account'
               : 'Create a new account to get started'}
@@ -83,29 +83,31 @@ const Auth = () => {
         <CardContent>
           <form onSubmit={handleAuth} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-base">Email</Label>
               <Input
                 id="email"
                 type="email"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="text-base h-12 touch-manipulation"
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-base">Password</Label>
               <Input
                 id="password"
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="text-base h-12 touch-manipulation"
                 required
                 minLength={6}
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full" size="touch" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -121,6 +123,7 @@ const Auth = () => {
               type="button"
               variant="ghost"
               className="w-full"
+              size="touch"
               onClick={() => setIsLogin(!isLogin)}
             >
               {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Login'}
