@@ -7,24 +7,69 @@ const AIProductPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Show popup after 5 seconds
-    const showTimer = setTimeout(() => {
-      setIsVisible(true);
-    }, 5000);
+    const checkAndShowPopup = () => {
+      const today = new Date();
+      const dayOfMonth = today.getDate();
+      const currentMonth = today.getMonth();
+      const currentYear = today.getFullYear();
+      
+      // Check if today is the first day of the month
+      const isFirstDayOfMonth = dayOfMonth === 1;
+      
+      // Get last shown date from localStorage
+      const lastShownKey = 'aiPopupLastShown';
+      const lastShownData = localStorage.getItem(lastShownKey);
+      
+      let shouldShow = false;
+      
+      if (isFirstDayOfMonth) {
+        if (!lastShownData) {
+          // Never shown before
+          shouldShow = true;
+        } else {
+          try {
+            const { month, year } = JSON.parse(lastShownData);
+            // Show if not shown this month yet
+            if (month !== currentMonth || year !== currentYear) {
+              shouldShow = true;
+            }
+          } catch (e) {
+            // Invalid data, show popup
+            shouldShow = true;
+          }
+        }
+      }
+      
+      if (shouldShow) {
+        // Show popup after 3 seconds delay
+        const showTimer = setTimeout(() => {
+          setIsVisible(true);
+          // Store that we've shown it this month
+          localStorage.setItem(lastShownKey, JSON.stringify({
+            month: currentMonth,
+            year: currentYear,
+            date: today.toISOString()
+          }));
+        }, 3000);
 
-    // Auto-dismiss after 15 seconds of being visible
-    const dismissTimer = setTimeout(() => {
-      setIsVisible(false);
-    }, 20000); // 5s to show + 15s visible
+        // Auto-dismiss after 20 seconds of being visible
+        const dismissTimer = setTimeout(() => {
+          setIsVisible(false);
+        }, 23000); // 3s delay + 20s visible
 
-    return () => {
-      clearTimeout(showTimer);
-      clearTimeout(dismissTimer);
+        return () => {
+          clearTimeout(showTimer);
+          clearTimeout(dismissTimer);
+        };
+      }
     };
+
+    checkAndShowPopup();
   }, []);
 
   const handleClose = () => {
     setIsVisible(false);
+    // User manually closed it, still counts as shown for this month
   };
 
   const handleWhatsApp = () => {
